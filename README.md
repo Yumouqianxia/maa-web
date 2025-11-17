@@ -100,6 +100,42 @@ Agent 会：
 
 > macOS 可直接跑上述 agent + `maa`（或 mock 脚本）模拟安卓 Ubuntu 容器；需要时再迁移到 Termux。
 
+### 2.4 无设备端到端演示（mock maa-cli）
+
+`agent/mock_maa.sh` 提供了一个零依赖的 `maa-cli` 替身，用来演练「下发任务→Agent 调用→日志上报」。流程示例：
+
+1. 启动后端（任意终端执行）：
+
+   ```bash
+   uvicorn app.main:app --app-dir backend --reload --port 8000
+   ```
+
+2. 预置 demo 用户/设备/任务（另一个终端）：
+
+   ```bash
+   PYTHONPATH=backend/. python backend/scripts/seed_demo_task.py
+   ```
+
+3. 准备 `agent/config.yaml`，关键字段示例：
+
+   ```yaml
+   server_base: "http://127.0.0.1:8000"
+   user_key: "demo-user"
+   device_id: "pc-mock"
+   maa_binary: "./mock_maa.sh"  # 使用 mock 版本，无需真机/maa-cli
+   ```
+
+4. 在 `agent` 目录启动 Agent：
+
+   ```bash
+   cd agent
+   python agent.py --config config.yaml -v
+   ```
+
+   控制台会打印 mock 脚本生成的日志，并把结果上报到后端，可在 `/api/devices/{device}/tasks` 查看。
+
+5. 如需模拟失败，可在终端临时设置 `MOCK_MAA_FAIL=1`，mock 脚本会返回自定义错误码并输出 stderr，便于验证失败链路。
+
 ---
 
 ## 3. React 控制台
