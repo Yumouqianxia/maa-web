@@ -1,0 +1,16 @@
+# 复制此文件为 config.yaml 并根据实际环境调整
+server_base: "http://127.0.0.1:8000"
+user_key: "demo-user"
+# device_id 留空时程序会在运行期生成临时 ID，建议填写固定值
+device_id: "android-termux-001"
+poll_interval: 2.0
+maa_binary: "/usr/local/bin/maa"
+work_dir: "/data/local/tmp/maa"
+agent_version: "maa-termux-agent/0.1.0"
+get_task_path: "/maa/getTask"
+report_status_path: "/maa/reportStatus"
+request_timeout: 30
+report_log_max_chars: 4000
+env:
+  LD_LIBRARY_PATH: "/data/local/tmp/maa/lib"
+

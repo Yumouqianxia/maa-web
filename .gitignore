@@ -1,0 +1,40 @@
+# Global
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Python / Backend
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+backend/.env
+backend/data/*.db
+backend/data/*.sqlite
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+
+# Agent
+agent/.venv/
+agent/env/
+agent/config.yaml
+
+# Frontend
+frontend/node_modules/
+frontend/.env
+frontend/.env.local
+frontend/.env.development
+frontend/.env.production
+frontend/dist/
+
+# Tooling
+.idea/
+.vscode/
+.pytest_cache/
+dist/
+build/
+coverage/
+

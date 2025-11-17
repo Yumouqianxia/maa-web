@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maa-remote-backend"
+version = "0.1.0"
+description = "Remote control server for MaaAssistantArknights CLI agents."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.111.0,<0.112.0",
+    "uvicorn[standard]>=0.29.0,<0.30.0",
+    "sqlalchemy>=2.0.30,<2.1.0",
+    "alembic>=1.13.1,<1.14.0",
+    "pydantic>=2.7.1,<2.8.0",
+    "pydantic-settings>=2.2.1,<2.3.0",
+    "python-multipart>=0.0.9,<0.0.10",
+    "jinja2>=3.1.4,<3.2.0",
+    "httpx>=0.27.0,<0.28.0",
+    "typing-extensions>=4.12.0,<5.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2.0,<8.3.0",
+    "pytest-asyncio>=0.23.6,<0.24.0",
+    "httpx>=0.27.0,<0.28.0",
+    "ruff>=0.4.4,<0.5.0",
+    "black>=24.4.0,<25.0.0",
+    "mypy>=1.10.0,<1.11.0"
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
+
+[tool.pytest.ini_options]
+pythonpath = ["app"]
+asyncio_mode = "auto"
+
